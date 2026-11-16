@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Lista de Usuários</h1>
+    <p>Total de usuários: <span th:text="${size}" style="color: #FF69B4; font-weight: bold;">0</span></p>
+    <table>
+        <thead>
+        <tr>
+            <th>Email</th>
+            <th>Nome</th>
+            <th>Sobrenome</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="user : ${users}" style="background-color: rgba(147, 51, 234, 8.1);">
+                <td th:text="${user.email}">email@example.com</td>
+                <td th:text="${user.first_name}">First Name</td>
+                <td th:text="${user.last_name}">Last Name</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Telefone</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        form { max-width: 500px; }
+        label { display: block; margin-top: 10px; font-weight: bold; }
+        input, select { width: 100%; padding: 8px; margin-top: 4px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        button { margin-top: 15px; padding: 10px 20px; background-color: #FF9800; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
+        button:hover { background-color: #F57C00; }
+        a { color: #2196F3; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <h1>Editar Telefone</h1>
+    <a href="/telefones/index">&larr; Voltar para lista</a>
+
+    <form th:action="@{/telefones/update/{id}(id=${telefone.id})}" method="post">
+        <label>Número:</label>
+        <input type="text" name="numero" th:value="${telefone.numero}" required>
+
+        <label>Tipo:</label>
+        <select name="tipo" required>
+            <option value="">Selecione o tipo</option>
+            <option value="Celular" th:selected="${telefone.tipo == 'Celular'}">Celular</option>
+            <option value="Residencial" th:selected="${telefone.tipo == 'Residencial'}">Residencial</option>
+            <option value="Comercial" th:selected="${telefone.tipo == 'Comercial'}">Comercial</option>
+        </select>
+
+        <label>Cliente:</label>
+        <select name="cliente_id" required>
+            <option value="">Selecione um cliente</option>
+            <option th:each="cliente : ${clientes}" th:value="${cliente.id}" th:text="${cliente.nome}"
+                    th:selected="${cliente.id == telefone.cliente_id}">Cliente</option>
+        </select>
+
+        <button type="submit">Atualizar</button>
+    </form>
+</body>
+</html>

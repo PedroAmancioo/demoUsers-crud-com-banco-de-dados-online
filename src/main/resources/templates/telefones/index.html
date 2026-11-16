@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Telefones</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { border-collapse: collapse; width: 100%; margin-top: 10px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #9C27B0; color: white; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        a { text-decoration: none; padding: 4px 8px; border-radius: 4px; margin: 2px; display: inline-block; }
+        .btn-create { background-color: #9C27B0; color: white; font-size: 16px; padding: 8px 16px; margin-bottom: 10px; }
+        .btn-edit { background-color: #FF9800; color: white; }
+        .btn-delete { background-color: #f44336; color: white; }
+        .btn-nav { background-color: #607D8B; color: white; margin-right: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Lista de Telefones</h1>
+    <p>Total de telefones: <span th:text="${size}" style="color: #9C27B0; font-weight: bold;">0</span></p>
+
+    <a href="/telefones/create" class="btn-create">+ Novo Telefone</a>
+
+    <div style="margin-bottom: 10px;">
+        <a href="/clientes/index" class="btn-nav">Clientes</a>
+        <a href="/enderecos/index" class="btn-nav">Endereços</a>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Número</th>
+            <th>Tipo</th>
+            <th>Cliente ID</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="telefone : ${telefones}">
+            <td th:text="${telefone.id}">1</td>
+            <td th:text="${telefone.numero}">(00) 00000-0000</td>
+            <td th:text="${telefone.tipo}">Celular</td>
+            <td th:text="${telefone.clienteId}">1</td>
+
+            <td>
+                <a th:href="@{/telefones/edit/{id}(id=${telefone.id})}"
+                   class="btn-edit">Editar</a>
+
+                <a th:href="@{/telefones/delete/{id}(id=${telefone.id})}"
+                   class="btn-delete"
+                   onclick="return confirm('Tem certeza que deseja excluir?')">
+                    Excluir
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>

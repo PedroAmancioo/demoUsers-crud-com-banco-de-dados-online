@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Novo Endereço</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        form { max-width: 500px; }
+        label { display: block; margin-top: 10px; font-weight: bold; }
+        input, select { width: 100%; padding: 8px; margin-top: 4px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        button { margin-top: 15px; padding: 10px 20px; background-color: #2196F3; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
+        button:hover { background-color: #1976D2; }
+        a { color: #2196F3; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <h1>Novo Endereço</h1>
+    <a href="/enderecos/index">&larr; Voltar para lista</a>
+
+    <form action="/enderecos/store" method="post">
+        <label>Rua:</label>
+        <input type="text" name="rua" required>
+
+        <label>Cidade:</label>
+        <input type="text" name="cidade" required>
+
+        <label>Estado:</label>
+        <input type="text" name="estado" required>
+
+        <label>CEP:</label>
+        <input type="text" name="cep" required>
+
+        <label>Cliente:</label>
+        <select name="cliente_id" required>
+            <option value="">Selecione um cliente</option>
+            <option th:each="cliente : ${clientes}" th:value="${cliente.id}" th:text="${cliente.nome}">Cliente</option>
+        </select>
+
+        <button type="submit">Salvar</button>
+    </form>
+</body>
+</html>

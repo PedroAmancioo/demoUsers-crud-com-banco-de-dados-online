@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Endereços</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { border-collapse: collapse; width: 100%; margin-top: 10px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #2196F3; color: white; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        a { text-decoration: none; padding: 4px 8px; border-radius: 4px; margin: 2px; display: inline-block; }
+        .btn-create { background-color: #2196F3; color: white; font-size: 16px; padding: 8px 16px; margin-bottom: 10px; }
+        .btn-edit { background-color: #FF9800; color: white; }
+        .btn-delete { background-color: #f44336; color: white; }
+        .btn-nav { background-color: #607D8B; color: white; margin-right: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Lista de Endereços</h1>
+    <p>Total de endereços: <span th:text="${size}" style="color: #2196F3; font-weight: bold;">0</span></p>
+
+    <a href="/enderecos/create" class="btn-create">+ Novo Endereço</a>
+
+    <div style="margin-bottom: 10px;">
+        <a href="/clientes/index" class="btn-nav">Clientes</a>
+        <a href="/telefones/index" class="btn-nav">Telefones</a>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Rua</th>
+            <th>Cidade</th>
+            <th>Estado</th>
+            <th>CEP</th>
+            <th>Cliente ID</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="endereco : ${enderecos}">
+                <td th:text="${endereco.id}">1</td>
+                <td th:text="${endereco.rua}">Rua</td>
+                <td th:text="${endereco.cidade}">Cidade</td>
+                <td th:text="${endereco.estado}">Estado</td>
+                <td th:text="${endereco.cep}">00000-000</td>
+                <td th:text="${endereco.clienteId}">1</td>
+                <td>
+                    <a th:href="@{/enderecos/edit/{id}(id=${endereco.id})}" class="btn-edit">Editar</a>
+                    <a th:href="@{/enderecos/delete/{id}(id=${endereco.id})}" class="btn-delete"
+                       onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
